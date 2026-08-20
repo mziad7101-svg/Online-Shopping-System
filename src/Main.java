@@ -6,8 +6,9 @@ import model.Order;
 import model.CartItem;
 import Payment.CreditCardPayment;
 import Payment.CashOnDelivery;
-public class Main { 
-    public static void main(String [] args) {
+
+public class Main {
+    public static void main(String[] args) {
 
         Scanner input = new Scanner(System.in);
         ShoppingSystem shoppingSystem = new ShoppingSystem();
@@ -56,7 +57,7 @@ public class Main {
 
         System.out.println("Welcome to Online Shopping System");
 
-        for(int i = 0 ; i <=15 ; i++ ){
+        for (int i = 0; i <= 15; i++) {
             System.out.print("*");
         }
 
@@ -71,11 +72,11 @@ public class Main {
         int customerId = 1;
         String email;
 
-        while(true){
+        while (true) {
             System.out.println("Enter your Email:");
             email = input.nextLine();
 
-            if(email.matches("^[A-Za-z0-9+_.-]+@(.+)$")){
+            if (email.matches("^[A-Za-z0-9+_.-]+@(.+)$")) {
                 break;
             }
 
@@ -89,22 +90,21 @@ public class Main {
         int addAnother;
         boolean productAdded = false;
 
-        do{
+        do {
             System.out.println("Enter product name:");
             String productName = input.nextLine();
 
             Product product = shoppingSystem.findProduct(productName);
 
-            if(product == null){
+            if (product == null) {
                 System.out.println("The product is not available.");
 
-                if(!productAdded){
+                if (!productAdded) {
                     System.out.println("You must add at least one product.");
                     addAnother = 1;
                     continue;
                 }
-            }
-            else{
+            } else {
                 System.out.println("Product found.");
                 System.out.println("Available stock: " + product.getStock());
                 System.out.println("Enter quantity:");
@@ -112,14 +112,13 @@ public class Main {
                 int quantity = input.nextInt();
                 input.nextLine();
 
-                if(customer.getCart().addProductToCart(product, quantity)){
+                if (customer.getCart().addProductToCart(product, quantity)) {
                     System.out.println("Product added to cart.");
                     productAdded = true;
-                }
-                else{
+                } else {
                     System.out.println("Not enough stock or invalid quantity.");
 
-                    if(!productAdded){
+                    if (!productAdded) {
                         addAnother = 1;
                         continue;
                     }
@@ -133,7 +132,7 @@ public class Main {
             addAnother = input.nextInt();
             input.nextLine();
 
-        }while(addAnother == 1 || !productAdded);
+        } while (addAnother == 1 || !productAdded);
 
         int orderId = 1;
 
@@ -148,14 +147,13 @@ public class Main {
 
         System.out.println("Products:");
 
-        for(CartItem item : order.getCartItems()){
+        for (CartItem item : order.getCartItems()) {
             System.out.println(
-                item.getProduct().getProductName()
-                + " - Quantity: "
-                + item.getQuantity()
-                + " - Price: "
-                + item.getProduct().getPriceOfProduct()
-            );
+                    item.getProduct().getProductName()
+                            + " - Quantity: "
+                            + item.getQuantity()
+                            + " - Price: "
+                            + item.getProduct().getPriceOfProduct());
         }
 
         System.out.println("Total Price: " + order.calculateTotalPrice());
@@ -168,38 +166,32 @@ public class Main {
         int choice = input.nextInt();
         input.nextLine();
 
-        switch(choice){
+        switch (choice) {
 
             case 1:
                 System.out.println("Enter your card number:");
                 String cardNumber = input.nextLine();
 
-                CreditCardPayment creditCardPayment =
-                        new CreditCardPayment(cardNumber);
+                CreditCardPayment creditCardPayment = new CreditCardPayment(cardNumber);
 
-                boolean creditResult =
-                        order.processPayment(creditCardPayment);
+                boolean creditResult = order.processPayment(creditCardPayment);
 
-                if(creditResult){
+                if (creditResult) {
                     System.out.println("Payment successful.");
-                }
-                else{
+                } else {
                     System.out.println("Payment failed.");
                 }
 
                 break;
 
             case 2:
-                CashOnDelivery cashOnDelivery =
-                        new CashOnDelivery();
+                CashOnDelivery cashOnDelivery = new CashOnDelivery();
 
-                boolean cashResult =
-                        order.processPayment(cashOnDelivery);
+                boolean cashResult = order.processPayment(cashOnDelivery);
 
-                if(cashResult){
+                if (cashResult) {
                     System.out.println("Payment successful.");
-                }
-                else{
+                } else {
                     System.out.println("Payment failed.");
                 }
 
@@ -216,12 +208,11 @@ public class Main {
 
         System.out.println("Products:");
 
-        for(CartItem item : order.getCartItems()){
+        for (CartItem item : order.getCartItems()) {
             System.out.println(
-                item.getProduct().getProductName()
-                + " - Quantity: "
-                + item.getQuantity()
-            );
+                    item.getProduct().getProductName()
+                            + " - Quantity: "
+                            + item.getQuantity());
         }
 
         System.out.println("Total Price: " + order.calculateTotalPrice());
@@ -229,4 +220,4 @@ public class Main {
         System.out.println("=================================");
         input.close();
     }
-} 
+}

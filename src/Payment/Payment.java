@@ -1,7 +1,6 @@
-package Payment ;
+package Payment;
 
 public interface Payment {
-public boolean processPayment(double price) ;
-    
-}    
+    public boolean processPayment(double price);
 
+}
