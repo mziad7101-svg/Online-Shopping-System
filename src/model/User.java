@@ -6,6 +6,15 @@ public abstract class User {
     private String email;
 
     public User(int id, String name, String email) {
+        if (id <= 0) {
+            throw new IllegalArgumentException("Enter a Valid ID.");
+        }
+        if (name == null || name.trim().isEmpty()) {
+            throw new IllegalArgumentException("User name cannot be empty.");
+        }
+        if (email == null || email.trim().isEmpty()) {
+            throw new IllegalArgumentException("User email cannot be empty.");
+        }
         this.id = id;
         this.name = name;
         this.email = email;
@@ -23,6 +32,5 @@ public abstract class User {
         return email;
     }
 
-    public User() {
-    }
+
 }
