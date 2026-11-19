@@ -1,6 +1,7 @@
 package model;
 
 import java.util.*;
+import java.util.function.Predicate;
 
 public class ShoppingSystem {
     private LinkedHashMap<Integer, Product> products = new LinkedHashMap<>();
@@ -165,6 +166,16 @@ public class ShoppingSystem {
         }
         ArrayList<Product> result = new ArrayList<>(productPriorityQueue);
         result.sort(Comparator.comparingDouble(Product::getPriceOfProduct));
+        return result;
+    }
+
+    public ArrayList<Product> filterProducts(Predicate<Product> condition) {
+        ArrayList<Product> result = new ArrayList<>();
+        for (Product product : products.values()) {
+            if (condition.test(product)) {
+                result.add(product);
+            }
+        }
         return result;
     }
 }

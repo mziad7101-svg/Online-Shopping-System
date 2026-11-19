@@ -168,7 +168,8 @@ public class Main {
                 System.out.println("5. View Top 3 Cheapest Products");
                 System.out.println("6. View Recently Searched Products");
                 System.out.println("7. View Order History");
-                System.out.println("8. Start shopping");
+                System.out.println("8. Filter Products");
+                System.out.println("9. Start Shopping");
 
                 if (input.hasNextInt()) {
                     int choice2 = input.nextInt();
@@ -239,8 +240,69 @@ public class Main {
                                 orderArrayList.forEach(System.out::println);
                             }
                             break;
-
                         case 8:
+                            System.out.println("1. Filter by Maximum Price");
+                            System.out.println("2. Filter by Minimum Price");
+                            System.out.println("3. Filter by Price Range");
+                            System.out.println("4. Show Available Products");
+                            if (input.hasNextInt()) {
+                                int filterChoice = input.nextInt();
+                                input.nextLine();
+                                switch (filterChoice) {
+                                    case 1:
+                                        System.out.println("Enter Maximum Price: ");
+                                        double maxPrice = input.nextDouble();
+                                        ArrayList<Product> filterMaxProducts =
+                                                shoppingSystem.filterProducts(product -> product.getPriceOfProduct() <= maxPrice);
+                                        if (filterMaxProducts.isEmpty()) {
+                                            System.out.println("No products found");
+                                        } else {
+                                            filterMaxProducts.forEach(System.out::println);
+                                        }
+                                        break;
+                                    case 2:
+                                        System.out.println("Enter Minimum Price:  ");
+                                        double minPrice = input.nextDouble();
+                                        ArrayList<Product> filterMinProducts =
+                                                shoppingSystem.filterProducts(product -> product.getPriceOfProduct() >= minPrice);
+                                        if (filterMinProducts.isEmpty()) {
+                                            System.out.println("No products found");
+                                        } else {
+                                            filterMinProducts.forEach(System.out::println);
+                                        }
+                                        break;
+                                    case 3:
+                                        System.out.println("Enter Minimum Price: ");
+                                        double minimumPrice = input.nextDouble();
+                                        System.out.println("Enter Maximum Price: ");
+                                        double maximumPrice = input.nextDouble();
+                                        if (minimumPrice > maximumPrice) {
+                                            System.out.println("Invalid Price Range!");
+                                        } else {
+                                            ArrayList<Product> filteredProducts =
+                                                    shoppingSystem.filterProducts(product -> product.getPriceOfProduct() >= minimumPrice
+                                                            && product.getPriceOfProduct() <= maximumPrice);
+                                            if (filteredProducts.isEmpty()) {
+                                                System.out.println("No products found");
+                                            } else {
+                                                filteredProducts.forEach(System.out::println);
+                                            }
+                                        }
+                                        break;
+                                    case 4:
+                                        ArrayList<Product> availableProducts = shoppingSystem.filterProducts(product -> product.getStock() > 0);
+                                        if (availableProducts.isEmpty()) {
+                                            System.out.println("No products found");
+                                        } else {
+                                            availableProducts.forEach(System.out::println);
+                                        }
+                                        break;
+                                }
+                            } else {
+                                System.out.println("Enter a Valid Number");
+                            }
+                            break;
+                        case 9:
                             startShopping = true;
                             break;
 
