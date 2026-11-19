@@ -1,6 +1,7 @@
 package model;
 
 import java.util.*;
+import java.util.function.Predicate;
 
 public class ShoppingSystem {
     private LinkedHashMap<Integer, Product> products = new LinkedHashMap<>();
@@ -8,6 +9,7 @@ public class ShoppingSystem {
     private LinkedHashMap<Integer, Order> orders = new LinkedHashMap<>();
     private HashSet<String> emails = new HashSet<>();
     private Queue<Order> pendingOrders = new ArrayDeque<>();
+    private static final Comparator<Product> byPrice = Comparator.comparingDouble(Product::getPriceOfProduct).reversed();
 
     public void addProduct(Product product) {
         if (product == null) {
@@ -110,25 +112,13 @@ public class ShoppingSystem {
 
     public ArrayList<Product> getProductsSortedByPrice() {
         ArrayList<Product> productArrayListByPrice = new ArrayList<>(products.values());
-        Comparator<Product> byPrice = new Comparator<Product>() {
-            @Override
-            public int compare(Product p1, Product p2) {
-                return Double.compare(p2.getPriceOfProduct(), p1.getPriceOfProduct());
-            }
-        };
-        Collections.sort(productArrayListByPrice, byPrice);
+        productArrayListByPrice.sort(byPrice);
         return productArrayListByPrice;
     }
 
     public ArrayList<Product> getProductsSortedByName() {
         ArrayList<Product> productArrayListByName = new ArrayList<>(products.values());
-        Comparator<Product> byName = new Comparator<Product>() {
-            @Override
-            public int compare(Product p1, Product p2) {
-                return p1.getProductName().compareToIgnoreCase(p2.getProductName());
-            }
-        };
-        Collections.sort(productArrayListByName, byName);
+        productArrayListByName.sort(Comparator.comparing(Product::getProductName, String.CASE_INSENSITIVE_ORDER));
         return productArrayListByName;
     }
 
@@ -158,12 +148,6 @@ public class ShoppingSystem {
             }
         }
         ArrayList<Product> result = new ArrayList<>(productPriorityQueue);
-        Comparator<Product> byPrice = new Comparator<Product>() {
-            @Override
-            public int compare(Product p1, Product p2) {
-                return Double.compare(p2.getPriceOfProduct(), p1.getPriceOfProduct());
-            }
-        };
         result.sort(byPrice);
         return result;
     }
@@ -181,13 +165,17 @@ public class ShoppingSystem {
             }
         }
         ArrayList<Product> result = new ArrayList<>(productPriorityQueue);
-        Comparator<Product> byPrice = new Comparator<Product>() {
-            @Override
-            public int compare(Product p1, Product p2) {
-                return Double.compare(p1.getPriceOfProduct(), p2.getPriceOfProduct());
+        result.sort(Comparator.comparingDouble(Product::getPriceOfProduct));
+        return result;
+    }
+
+    public ArrayList<Product> filterProducts(Predicate<Product> condition) {
+        ArrayList<Product> result = new ArrayList<>();
+        for (Product product : products.values()) {
+            if (condition.test(product)) {
+                result.add(product);
             }
-        };
-        result.sort(byPrice);
+        }
         return result;
     }
 }

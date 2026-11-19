@@ -1,6 +1,8 @@
 package Payment;
 
+@FunctionalInterface
 public interface Payment {
-    public boolean processPayment(double price);
+
+    boolean processPayment(double price);
 
 }
