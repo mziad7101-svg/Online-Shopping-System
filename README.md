@@ -2,24 +2,28 @@
 
 A console-based Online Shopping System built using Java and Object-Oriented Programming (OOP) concepts.
 
-The application allows customers to register, browse and search products, manage their shopping carts, undo and redo cart additions, and place orders using simulated payment methods.
+The application allows customers to register, log in, browse and search products, filter products by different criteria, manage their shopping carts, undo and redo cart additions, and place orders using simulated payment methods.
 
 ## Features
 
-- Register customers and log in using email
-- Browse products sorted by price or name
-- Search for products by name
-- View the top 3 most expensive products
-- View the top 3 cheapest products
-- View recently searched products
-- Add products to the shopping cart
-- Check product availability and stock
-- Calculate cart and order totals
-- Undo and redo cart additions
-- Create orders from shopping carts
-- Choose between Credit Card and Cash On Delivery
-- Update product stock after successful simulated payment
-- Track customer order history during the current session
+- Register customers and log in using email.
+- Browse products sorted by price or name.
+- Search for products by name.
+- View the top 3 most expensive products.
+- View the top 3 cheapest products.
+- View recently searched products.
+- Filter products by maximum price.
+- Filter products by minimum price.
+- Filter products within a price range.
+- View available products (in-stock products).
+- Add products to the shopping cart.
+- Check product availability and stock.
+- Calculate cart and order totals.
+- Undo and redo cart additions.
+- Create orders from shopping carts.
+- Choose between Credit Card and Cash On Delivery.
+- Update product stock after successful simulated payment.
+- Track customer order history during the current session.
 
 ## OOP Concepts Used
 
@@ -28,6 +32,7 @@ The application allows customers to register, browse and search products, manage
 - **Polymorphism:** Different payment implementations are used through the `Payment` interface.
 - **Abstraction:** The abstract `User` class provides shared user information.
 - **Interfaces:** The `Payment` interface defines the payment operation.
+- **Functional Interfaces:** The `Payment` interface is marked with `@FunctionalInterface`.
 - **Composition:** Classes such as `Customer`, `Cart`, `CartItem`, and `Order` work together to represent shopping relationships.
 - **Method Overriding:** Used in methods such as `toString()` and payment implementations.
 - **Enums:** `OrderStatus` represents order states.
@@ -37,21 +42,24 @@ The application allows customers to register, browse and search products, manage
 | Data Structure | Used In | Why It Was Chosen | Typical Time Complexity |
 |---|---|---|---|
 | `ArrayList` | Cart items, order items, order history, and sorted product lists | Dynamic storage and easy iteration | Access: O(1), Search: O(n), Append: O(1) amortized |
-| `Stack` | Cart undo and redo | Follows LIFO (Last In, First Out) to reverse recent cart additions | Push / Pop / Peek: O(1) |
+| `Stack` | Cart undo and redo | Follows LIFO (Last In, First Out) | Push / Pop / Peek: O(1) |
 | `LinkedHashMap` | Products, customers, and orders | Stores objects by unique IDs and preserves insertion order | Put / Get / Contains: O(1) average |
 | `HashSet` | Registered customer emails | Efficient duplicate checks | Add / Contains: O(1) average |
-| `Deque` (`ArrayDeque`) | Recently searched products | Efficient operations at both ends and recent-search management | Add / Remove at ends: O(1) amortized |
+| `Deque` (`ArrayDeque`) | Recently searched products | Efficient operations at both ends | Add / Remove at ends: O(1) amortized |
 | `Queue` (`ArrayDeque`) | Pending orders | Maintains FIFO (First In, First Out) processing order | Offer / Peek / Poll: O(1) amortized |
 | `PriorityQueue` | Top 3 most expensive and cheapest products | Maintains the best candidates while scanning products | Offer / Poll: O(log k), Peek: O(1) |
 
 *Note: Complexities are typical average or amortized bounds. The queue-processing methods are implemented but are not connected to the main application flow.*
 
-## Iterators and Sorting
+## Java Features and Sorting
 
+- **Lambda Expressions:** Used with functional interfaces and collection operations.
+- **Method References:** Used to simplify operations such as printing order history.
+- **Predicate:** Used to filter products based on conditions such as price and stock availability.
 - **Iterator:** Used to traverse recently searched products.
 - **`descendingIterator()`:** Displays recent searches from newest to oldest.
 - **`Comparator`:** Defines product ordering by price and name, and ordering for top-three product selection.
-- **`Collections.sort()`:** Sorts products by price and name.
+- **`Collections.sort()`:** Used for sorting collections.
 - **`StringBuilder`:** Used to build the order summary in `Order.toString()`.
 
 ## Payment Methods
@@ -113,6 +121,8 @@ OSS/
 - Java Collections Framework
 - Object-Oriented Programming
 - Data Structures
+- Lambda Expressions
+- Functional Interfaces
 - IntelliJ IDEA
 - Visual Studio Code
 
@@ -124,7 +134,7 @@ OSS/
 2. Open the project in IntelliJ IDEA.
 3. Open `Main.java` inside the `src` directory.
 4. Run the `main()` method.
-5. Follow the console menu to register, browse products, manage the cart, and place an order.
+5. Follow the console menu to register, browse products, filter products, manage the cart, and place an order.
 
 The project currently uses IDE configuration rather than a documented Maven or Gradle build setup.
 
@@ -143,15 +153,17 @@ The project currently uses IDE configuration rather than a documented Maven or G
 
 This project was developed to practice:
 
-- Object-Oriented Programming in Java
-- Java Collections Framework
-- Data Structures and their time complexities
-- Searching and sorting operations
-- Stack-based undo and redo
-- Queue and Deque operations
-- PriorityQueue for top-three product selection
-- Interfaces and polymorphism
-- Order and payment flow management
+- Object-Oriented Programming in Java.
+- Java Collections Framework.
+- Data Structures and their time complexities.
+- Searching and sorting operations.
+- Product filtering using `Predicate`.
+- Lambda Expressions and Method References.
+- Stack-based undo and redo.
+- Queue and Deque operations.
+- PriorityQueue for top-three product selection.
+- Interfaces and polymorphism.
+- Order and payment flow management.
 
 ## Future Improvements
 
