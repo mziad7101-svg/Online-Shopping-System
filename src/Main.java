@@ -236,9 +236,7 @@ public class Main {
                             if (orderArrayList.isEmpty()) {
                                 System.out.println("Order history is empty.");
                             } else {
-                                for (Order order : orderArrayList) {
-                                    System.out.println(order.toString());
-                                }
+                                orderArrayList.forEach(System.out::println);
                             }
                             break;
 
@@ -517,12 +515,10 @@ public class Main {
             System.out.println("Products:");
 
             for (CartItem item : order.getCartItems()) {
-                System.out.println(
-                        item.getProduct().getProductName()
-                                + " - Quantity: "
-                                + item.getQuantity());
+                System.out.println(item.getProduct().getProductName()
+                        + " - Quantity: "
+                        + item.getQuantity());
             }
-
             System.out.println("Total Price: " + order.calculateTotalPrice());
             System.out.println("Payment Status: " + order.getOrderStatus());
             System.out.println("=================================");
