@@ -34,16 +34,9 @@ public class Order {
     }
 
     public double calculateTotalPrice() {
-
-        double total = 0;
-
-        for (CartItem item : cartItems) {
-
-            total += item.getProduct().getPriceOfProduct()
-                    * item.getQuantity();
-        }
-
-        return total;
+        return cartItems.stream().mapToDouble(item ->
+                item.getProduct().getPriceOfProduct() *
+                        item.getQuantity()).sum();
     }
 
     public boolean processPayment(Payment payment) {
