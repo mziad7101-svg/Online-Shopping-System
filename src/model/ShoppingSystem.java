@@ -2,6 +2,7 @@ package model;
 
 import java.util.*;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class ShoppingSystem {
     private LinkedHashMap<Integer, Product> products = new LinkedHashMap<>();
@@ -170,12 +171,7 @@ public class ShoppingSystem {
     }
 
     public ArrayList<Product> filterProducts(Predicate<Product> condition) {
-        ArrayList<Product> result = new ArrayList<>();
-        for (Product product : products.values()) {
-            if (condition.test(product)) {
-                result.add(product);
-            }
-        }
-        return result;
+        return products.values().stream()
+                .filter(condition).collect(Collectors.toCollection(ArrayList::new));
     }
 }
