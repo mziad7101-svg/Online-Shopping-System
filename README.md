@@ -24,6 +24,8 @@ The application allows customers to register, log in, browse and search products
 - Choose between Credit Card and Cash On Delivery.
 - Update product stock after successful simulated payment.
 - Track customer order history during the current session.
+- Use Java Streams to calculate cart and order totals.
+- Use Java Streams to filter products and copy cart items when creating orders.
 
 ## OOP Concepts Used
 
@@ -56,6 +58,10 @@ The application allows customers to register, log in, browse and search products
 - **Lambda Expressions:** Used with functional interfaces and collection operations.
 - **Method References:** Used to simplify operations such as printing order history.
 - **Predicate:** Used to filter products based on conditions such as price and stock availability.
+- **Stream API:** Used for cart and order total calculations, product filtering, and copying cart items.
+- **Primitive Streams:** `mapToDouble()` is used for numerical calculations, while `sum()` calculates total values.
+- **Stream Operations:** `filter()`, `map()`, and `collect()` are used to process and transform collections.
+- **Collectors:** `Collectors.toCollection()` is used to collect Stream results into a new `ArrayList`.
 - **Iterator:** Used to traverse recently searched products.
 - **`descendingIterator()`:** Displays recent searches from newest to oldest.
 - **`Comparator`:** Defines product ordering by price and name, and ordering for top-three product selection.
@@ -123,6 +129,7 @@ OSS/
 - Data Structures
 - Lambda Expressions
 - Functional Interfaces
+- Java Stream API
 - IntelliJ IDEA
 - Visual Studio Code
 
@@ -159,6 +166,7 @@ This project was developed to practice:
 - Searching and sorting operations.
 - Product filtering using `Predicate`.
 - Lambda Expressions and Method References.
+- Java Stream API and its intermediate and terminal operations.
 - Stack-based undo and redo.
 - Queue and Deque operations.
 - PriorityQueue for top-three product selection.
@@ -178,4 +186,4 @@ This project was developed to practice:
 
 ## Author
 
-Developed as a Java learning project to practice Object-Oriented Programming, Java Collections, and Data Structures.
+Developed as a Java learning project to practice Object-Oriented Programming, Java Collections, Data Structures, and the Stream API.

@@ -3,6 +3,7 @@ package model;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import Payment.Payment;
 
@@ -23,27 +24,17 @@ public class Order {
         this.orderId = orderId;
         this.customer = customer;
         this.status = OrderStatus.PENDING;
-        this.cartItems = new ArrayList<>();
-        for (CartItem item : customer.getCart().getCartItems()) {
-            CartItem newItem = new CartItem(
-                    item.getProduct(),
-                    item.getQuantity()
-            );
-            this.cartItems.add(newItem);
-        }
+
+        this.cartItems = customer.getCart().getCartItems().stream()
+                .map(item ->
+                        new CartItem(item.getProduct(), item.getQuantity()))
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 
     public double calculateTotalPrice() {
-
-        double total = 0;
-
-        for (CartItem item : cartItems) {
-
-            total += item.getProduct().getPriceOfProduct()
-                    * item.getQuantity();
-        }
-
-        return total;
+        return cartItems.stream().mapToDouble(item ->
+                item.getProduct().getPriceOfProduct() *
+                        item.getQuantity()).sum();
     }
 
     public boolean processPayment(Payment payment) {
