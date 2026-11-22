@@ -42,8 +42,8 @@ public class Cart {
     }
 
     public double calculateTotalPrice() {
-        return cartItems.stream().mapToDouble(cartItems -> cartItems
-                .getProduct().getPriceOfProduct() * cartItems.getQuantity()).sum();
+        return cartItems.stream().mapToDouble(item -> item
+                .getProduct().getPriceOfProduct() * item.getQuantity()).sum();
     }
 
     public List<CartItem> getCartItems() {
