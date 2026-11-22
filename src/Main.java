@@ -307,7 +307,7 @@ public class Main {
                             break;
 
                         default:
-                            System.out.println("Choose a number from 1 to 7.");
+                            System.out.println("Choose a number from 1 to 9.");
                     }
 
                 } else {
