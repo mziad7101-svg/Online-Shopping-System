@@ -84,31 +84,32 @@ public class ShoppingSystem {
     }
 
 
-    public Product findProduct(String productName) {
+    public Optional<Product> findProduct(String productName) {
         if (productName == null || productName.trim().isEmpty()) {
-            return null;
+            return Optional.empty();
         }
         String searchName = productName.trim().toLowerCase();
 
         for (Product p : products.values()) {
             if (p.getProductName().trim().toLowerCase().equals(searchName)) {
-                return p;
+                return Optional.of(p);
             }
         }
 
         for (Product p : products.values()) {
             if (p.getProductName().trim().toLowerCase().contains(searchName)) {
-                return p;
+                return Optional.of(p);
             }
         }
-        return null;
+        return Optional.empty();
     }
 
-    public Product findProductById(int productID) {
+    public Optional<Product> findProductById(int productID) {
         if (productID == 0 || productID < 0) {
             throw new IllegalArgumentException("Enter a Positive Product ID.");
         }
-        return products.get(productID);
+        Optional<Product> check = Optional.ofNullable(products.get(productID));
+        return check;
     }
 
     public ArrayList<Product> getProductsSortedByPrice() {
@@ -123,16 +124,16 @@ public class ShoppingSystem {
         return productArrayListByName;
     }
 
-    public Customer findCustomerByEmail(String email) {
+    public Optional<Customer> findCustomerByEmail(String email) {
         if (email == null) {
-            return null;
+            return Optional.empty();
         }
         for (Customer customer : customers.values()) {
             if (customer.getEmail().equalsIgnoreCase(email)) {
-                return customer;
+                return Optional.of(customer);
             }
         }
-        return null;
+        return Optional.empty();
 
     }
 

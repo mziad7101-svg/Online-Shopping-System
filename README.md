@@ -62,6 +62,7 @@ The application allows customers to register, log in, browse and search products
 - **Primitive Streams:** `mapToDouble()` is used for numerical calculations, while `sum()` calculates total values.
 - **Stream Operations:** `filter()`, `map()`, and `collect()` are used to process and transform collections.
 - **Collectors:** `Collectors.toCollection()` is used to collect Stream results into a new `ArrayList`.
+- **Optional:** Used in product and customer lookup methods to represent values that may be unavailable instead of returning `null`.
 - **Iterator:** Used to traverse recently searched products.
 - **`descendingIterator()`:** Displays recent searches from newest to oldest.
 - **`Comparator`:** Defines product ordering by price and name, and ordering for top-three product selection.
