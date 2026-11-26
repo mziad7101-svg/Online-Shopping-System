@@ -135,11 +135,12 @@ public class Main {
                         case 2:
                             System.out.println("Enter your Email:");
                             String emailForLogin = input.nextLine();
-                            customer = shoppingSystem.findCustomerByEmail(emailForLogin);
-                            if (customer == null) {
+                            Optional<Customer> customer1 = shoppingSystem.findCustomerByEmail(emailForLogin);
+                            if (customer1.isEmpty()) {
                                 System.out.println("Email cannot be find");
                             } else {
                                 System.out.println("Logged in Successfully.");
+                                customer = customer1.get();
                             }
                             break;
                         case 3:

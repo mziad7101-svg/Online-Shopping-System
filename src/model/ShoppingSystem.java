@@ -124,16 +124,16 @@ public class ShoppingSystem {
         return productArrayListByName;
     }
 
-    public Customer findCustomerByEmail(String email) {
+    public Optional<Customer> findCustomerByEmail(String email) {
         if (email == null) {
-            return null;
+            return Optional.empty();
         }
         for (Customer customer : customers.values()) {
             if (customer.getEmail().equalsIgnoreCase(email)) {
-                return customer;
+                return Optional.of(customer);
             }
         }
-        return null;
+        return Optional.empty();
 
     }
 
