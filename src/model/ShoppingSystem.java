@@ -84,24 +84,24 @@ public class ShoppingSystem {
     }
 
 
-    public Product findProduct(String productName) {
+    public Optional<Product> findProduct(String productName) {
         if (productName == null || productName.trim().isEmpty()) {
-            return null;
+            return Optional.empty();
         }
         String searchName = productName.trim().toLowerCase();
 
         for (Product p : products.values()) {
             if (p.getProductName().trim().toLowerCase().equals(searchName)) {
-                return p;
+                return Optional.of(p);
             }
         }
 
         for (Product p : products.values()) {
             if (p.getProductName().trim().toLowerCase().contains(searchName)) {
-                return p;
+                return Optional.of(p);
             }
         }
-        return null;
+        return Optional.empty();
     }
 
     public Optional<Product> findProductById(int productID) {

@@ -195,15 +195,16 @@ public class Main {
                             System.out.println("Enter Product Name:");
                             String productName = input.nextLine();
 
-                            Product p = shoppingSystem.findProduct(productName);
+                            Optional<Product> p = shoppingSystem.findProduct(productName);
 
-                            if (p == null) {
+                            if (p.isEmpty()) {
                                 System.out.println("Product not found.");
                             } else {
-                                System.out.println(p.getProductName() + " | "
-                                        + p.getPriceOfProduct() + " | Stock: "
-                                        + p.getStock());
-                                customer.addRecentlySearchedProduct(p);
+                                Product product = p.get();
+                                System.out.println(product.getProductName() + " | "
+                                        + product.getPriceOfProduct() + " | Stock: "
+                                        + product.getStock());
+                                customer.addRecentlySearchedProduct(product);
                             }
                             break;
                         case 4:
@@ -325,9 +326,9 @@ public class Main {
                 System.out.println("Enter product name:");
                 String productName = input.nextLine();
 
-                Product product = shoppingSystem.findProduct(productName);
+                Optional<Product> product = shoppingSystem.findProduct(productName);
 
-                if (product == null) {
+                if (product.isEmpty()) {
                     System.out.println("The product is not available.");
 
                     if (!productAdded) {
@@ -337,7 +338,7 @@ public class Main {
                     }
                 } else {
                     System.out.println("Product found.");
-                    System.out.println("Available stock: " + product.getStock());
+                    System.out.println("Available stock: " + product.get().getStock());
                     System.out.println("Enter quantity:");
                     int quantity = 0;
                     while (true) {
@@ -355,7 +356,7 @@ public class Main {
                             System.out.println("Enter quantity again:");
                         }
                     }
-                    if (customer.getCart().addProductToCart(product, quantity)) {
+                    if (customer.getCart().addProductToCart(product.get(), quantity)) {
                         System.out.println("Product added to cart.");
                         productAdded = true;
                     } else {
