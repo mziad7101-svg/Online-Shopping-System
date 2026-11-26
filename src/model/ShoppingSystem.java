@@ -104,11 +104,12 @@ public class ShoppingSystem {
         return null;
     }
 
-    public Product findProductById(int productID) {
+    public Optional<Product> findProductById(int productID) {
         if (productID == 0 || productID < 0) {
             throw new IllegalArgumentException("Enter a Positive Product ID.");
         }
-        return products.get(productID);
+        Optional<Product> check = Optional.ofNullable(products.get(productID));
+        return check;
     }
 
     public ArrayList<Product> getProductsSortedByPrice() {
